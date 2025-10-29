@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjei837s11c2x"]
+
+[ext_resource type="Script" uid="uid://bwlf17lw4mse3" path="res://Scripts/PlayerMovement.gd" id="1_3etf2"]
+[ext_resource type="PackedScene" uid="uid://cn8qkp3ydev4x" path="res://Models/SMG.blend" id="2_40svl"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_j6hkg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3etf2"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_3etf2")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_j6hkg")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_3etf2")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.54756284, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+
+[node name="Hand" type="Node3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.608, -0.532, -0.745)
+
+[node name="SMG" parent="Head/Camera3D/Hand" instance=ExtResource("2_40svl")]
