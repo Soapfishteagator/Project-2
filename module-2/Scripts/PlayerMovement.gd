@@ -74,8 +74,13 @@ func _physics_process(delta):
 
 	if is_on_floor():
 		if direction:
+<<<<<<< HEAD
 			velocity.x = lerp(velocity.x, direction.x * speed, delta * 15.0) 
 			velocity.z = lerp(velocity.z, direction.z * speed, delta * 15.0)
+=======
+			velocity.x = direction.x * speed
+			velocity.z = direction.z * speed
+>>>>>>> upstream/master
 		else:
 			velocity.x = lerp(velocity.x, 0.0, delta * 10.0)
 			velocity.z = lerp(velocity.z, 0.0, delta * 10.0)
