@@ -1,7 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://bjei837s11c2x"]
 
 [ext_resource type="Script" uid="uid://bwlf17lw4mse3" path="res://Scripts/PlayerMovement.gd" id="1_3etf2"]
+<<<<<<< HEAD
+[ext_resource type="PackedScene" uid="uid://cn8qkp3ydev4x" path="res://Models/SMG.scn" id="2_40svl"]
+=======
 [ext_resource type="PackedScene" uid="uid://cn8qkp3ydev4x" path="res://Models/SMG.blend" id="2_40svl"]
+>>>>>>> upstream/master
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_j6hkg"]
 

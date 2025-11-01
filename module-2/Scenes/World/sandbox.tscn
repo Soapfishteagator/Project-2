@@ -1,7 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://cg4drsxg3jhu2"]
 
 [ext_resource type="PackedScene" uid="uid://bjei837s11c2x" path="res://Scenes/Characters/player.tscn" id="1_yxi28"]
+<<<<<<< HEAD
+[ext_resource type="PackedScene" uid="uid://bqq8nkqxaagmk" path="res://Models/Basement Blockout.scn" id="2_jfrsg"]
+=======
 [ext_resource type="PackedScene" uid="uid://bqq8nkqxaagmk" path="res://Models/Basement Blockout.blend" id="2_jfrsg"]
+>>>>>>> upstream/master
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yxi28"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
