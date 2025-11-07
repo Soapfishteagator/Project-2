@@ -1,15 +1,14 @@
 extends Node
+class_name Health
 
-@export var max_health := 10.0
-var health = max_health
-@export var health_bar := false
-var bar : ProgressBar
+@export var max_health : float= 10.0
+var health : float = max_health
+@export var health_bar : bool = true
+@onready var bar : ProgressBar = $HealthBar
 
 func _ready() -> void:
-	if health_bar:
-		bar = $Camera3D/HealthBar
-		bar.max_value = max_health
-		bar.value = health
+	bar.max_value = max_health
+	bar.value = health
 
 func TakeDamage(damage : float):
 	health -= damage

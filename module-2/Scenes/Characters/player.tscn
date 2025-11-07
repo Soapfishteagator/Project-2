@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bwlf17lw4mse3" path="res://Scripts/PlayerMovement.gd" id="1_3etf2"]
 [ext_resource type="PackedScene" uid="uid://cn8qkp3ydev4x" path="res://Models/SMG.blend" id="2_40svl"]
-[ext_resource type="Script" uid="uid://bgvi5q4b8hi1r" path="res://Scripts/health.gd" id="2_al8ar"]
+[ext_resource type="Script" uid="uid://bgvi5q4b8hi1r" path="res://Scripts/Health.gd" id="2_al8ar"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_j6hkg"]
 
@@ -38,16 +38,8 @@ shape = SubResource("CapsuleShape3D_3etf2")
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.54756284, 0)
 script = ExtResource("2_al8ar")
-health_bar = true
 
-[node name="Camera3D" type="Camera3D" parent="Head"]
-
-[node name="Hand" type="Node3D" parent="Head/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.608, -0.532, -0.745)
-
-[node name="SMG" parent="Head/Camera3D/Hand" instance=ExtResource("2_40svl")]
-
-[node name="HealthBar" type="ProgressBar" parent="Head/Camera3D"]
+[node name="HealthBar" type="ProgressBar" parent="Head"]
 offset_left = 21.0
 offset_top = 17.0
 offset_right = 420.0
@@ -58,16 +50,20 @@ max_value = 10.0
 value = 5.0
 show_percentage = false
 
-[node name="Panel" type="Panel" parent="Head/Camera3D"]
+[node name="Panel" type="Panel" parent="Head"]
 visible = false
 custom_minimum_size = Vector2(1920, 1080)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -384.0
+offset_top = -216.0
+offset_right = 384.0
+offset_bottom = 216.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Dead" type="Label" parent="Head/Camera3D/Panel"]
+[node name="Dead" type="Label" parent="Head/Panel"]
 layout_mode = 0
 offset_left = 777.0
 offset_top = 446.0
@@ -78,7 +74,7 @@ label_settings = SubResource("LabelSettings_al8ar")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Dead2" type="Label" parent="Head/Camera3D/Panel"]
+[node name="Dead2" type="Label" parent="Head/Panel"]
 layout_mode = 0
 offset_left = 777.0
 offset_top = 569.0
@@ -89,3 +85,10 @@ text = "Jump to restart
 label_settings = SubResource("LabelSettings_gy20a")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+
+[node name="Hand" type="Node3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.608, -0.532, -0.745)
+
+[node name="SMG" parent="Head/Camera3D/Hand" instance=ExtResource("2_40svl")]

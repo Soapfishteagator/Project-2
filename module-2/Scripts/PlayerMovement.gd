@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name PlayerMovement
 
 #movement constants
 const WALK_SPEED = 4.5
@@ -26,8 +27,10 @@ var t_bob := 0.0
 const BASE_FOV = 70
 const FOV_CHANGE = 1.3
 
-#death
+#control
 var dead := false
+var disabled := false
+var disableTimer := 0.0
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -41,13 +44,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _input(event: InputEvent) -> void:
 	if dead:
-		if event.is_action_just_pressed("jump"):
+		if event.is_action_pressed("jump"):
 			ResetDeath()
 		return
 	#input
 	inputDirection = Input.get_vector("left", "right","front", "back")
 	
-	if event.is_action_pressed("sprint"):
+	if Input.is_action_pressed("sprint"):
 		speed = WALK_SPEED * SPRINT_MULTIPLIER
 	else:
 		speed = WALK_SPEED
@@ -56,20 +59,31 @@ func _input(event: InputEvent) -> void:
 		jump_buffer = JUMP_BUFFER_TIME
 
 func _physics_process(delta):
-	if dead:
-		return
-		
-	#timers
-	if jump_buffer > 0:
-		jump_buffer -= delta
-	if coyotee_time > 0:
-		coyotee_time -= delta
-	
 	#GRAVITY
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta
 	else :
 		coyotee_time = COYOTEE_TIME
+	
+	#body control
+	if disableTimer > 0:
+		disableTimer -= delta
+	
+	if dead or disabled:
+		if disableTimer <= 0:
+			if disabled:
+				if is_on_floor():
+					disabled = false
+			if is_on_floor():
+				velocity = Vector3.ZERO
+		move_and_slide()
+		return
+	
+	#timers
+	if jump_buffer > 0:
+		jump_buffer -= delta
+	if coyotee_time > 0:
+		coyotee_time -= delta
 	
 	#jump
 	if jump_buffer > 0 && coyotee_time > 0:
@@ -109,12 +123,12 @@ func _headbob(time) -> Vector3:
 	return pos
 
 func Death():
-	$Head/Camera3D/Panel.visible = true	
+	$Head/Panel.visible = true	
 	dead = true
 	
 func ResetDeath():
-	$Head/Camera3D/Panel.visible = false
+	$Head/Panel.visible = false
 	for item in get_children():
-		if item.name == "Head":
+		if item is Health:
 			item.call("RestoreHealth", 10.0)
 	dead = false
