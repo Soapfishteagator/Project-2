@@ -1,11 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjei837s11c2x"]
+[gd_scene load_steps=10 format=3 uid="uid://bjei837s11c2x"]
 
 [ext_resource type="Script" uid="uid://bwlf17lw4mse3" path="res://Scripts/PlayerMovement.gd" id="1_3etf2"]
 [ext_resource type="PackedScene" uid="uid://cn8qkp3ydev4x" path="res://Models/SMG.blend" id="2_40svl"]
+[ext_resource type="Script" uid="uid://bgvi5q4b8hi1r" path="res://Scripts/health.gd" id="2_al8ar"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_j6hkg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3etf2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_40svl"]
+bg_color = Color(0.6, 0.6, 0.6, 0.25882354)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_al8ar"]
+bg_color = Color(0.6974081, 0.18617523, 0.21958447, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8760661, 0.80042666, 0.51304513, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_al8ar"]
+font_size = 116
+
+[sub_resource type="LabelSettings" id="LabelSettings_gy20a"]
+font_size = 26
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_3etf2")
@@ -19,6 +37,8 @@ shape = SubResource("CapsuleShape3D_3etf2")
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.54756284, 0)
+script = ExtResource("2_al8ar")
+health_bar = true
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 
@@ -26,3 +46,46 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.54756284, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.608, -0.532, -0.745)
 
 [node name="SMG" parent="Head/Camera3D/Hand" instance=ExtResource("2_40svl")]
+
+[node name="HealthBar" type="ProgressBar" parent="Head/Camera3D"]
+offset_left = 21.0
+offset_top = 17.0
+offset_right = 420.0
+offset_bottom = 44.0
+theme_override_styles/background = SubResource("StyleBoxFlat_40svl")
+theme_override_styles/fill = SubResource("StyleBoxFlat_al8ar")
+max_value = 10.0
+value = 5.0
+show_percentage = false
+
+[node name="Panel" type="Panel" parent="Head/Camera3D"]
+visible = false
+custom_minimum_size = Vector2(1920, 1080)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dead" type="Label" parent="Head/Camera3D/Panel"]
+layout_mode = 0
+offset_left = 777.0
+offset_top = 446.0
+offset_right = 1126.0
+offset_bottom = 604.0
+text = "Dead"
+label_settings = SubResource("LabelSettings_al8ar")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dead2" type="Label" parent="Head/Camera3D/Panel"]
+layout_mode = 0
+offset_left = 777.0
+offset_top = 569.0
+offset_right = 1126.0
+offset_bottom = 727.0
+text = "Jump to restart
+"
+label_settings = SubResource("LabelSettings_gy20a")
+horizontal_alignment = 1
+vertical_alignment = 1

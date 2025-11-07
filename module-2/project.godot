@@ -15,6 +15,10 @@ run/main_scene="uid://cg4drsxg3jhu2"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[global_group]
+
+Characters="Every moving being that can trigger stuff."
+
 [input]
 
 front={

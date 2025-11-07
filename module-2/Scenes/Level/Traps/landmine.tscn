@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://2yrprkslk7gt"]
+
+[ext_resource type="Script" uid="uid://ch72edordxa8q" path="res://Scripts/TriggerDamage.gd" id="1_rx1e8"]
+[ext_resource type="PackedScene" uid="uid://1avb5fgrrau7" path="res://Models/Landmine.blend" id="2_shhk3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vcjki"]
+radius = 0.3426085
+
+[node name="Landmine" type="Area3D"]
+script = ExtResource("1_rx1e8")
+explosion = true
+
+[node name="Landmine" parent="." instance=ExtResource("2_shhk3")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_vcjki")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
