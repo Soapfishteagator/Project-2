@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cg4drsxg3jhu2"]
+[gd_scene load_steps=9 format=3 uid="uid://cg4drsxg3jhu2"]
 
 [ext_resource type="PackedScene" uid="uid://bjei837s11c2x" path="res://Scenes/Characters/player.tscn" id="1_nwmg7"]
 [ext_resource type="PackedScene" uid="uid://bqq8nkqxaagmk" path="res://Models/Basement Blockout.blend" id="2_ejk8a"]
 [ext_resource type="PackedScene" uid="uid://2yrprkslk7gt" path="res://Scenes/Level/Traps/landmine.tscn" id="3_yhu83"]
+[ext_resource type="PackedScene" uid="uid://cgwkydtlbxrnl" path="res://Scenes/explosion/explosion.tscn" id="4_ejk8a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yxi28"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -44,18 +45,24 @@ transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, -10.547137, 0.90973854,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.259874, -0.9928775, -1.5783691)
 shape = SubResource("BoxShape3D_jfrsg")
 
-[node name="Landmine" parent="." instance=ExtResource("3_yhu83")]
+[node name="Landmines" type="Node" parent="."]
+
+[node name="Landmine" parent="Landmines" instance=ExtResource("3_yhu83")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5814495, 0.0716216, 0.19599342)
 damage = 3.0
+explosion_effect_scene = ExtResource("4_ejk8a")
 
-[node name="Landmine2" parent="." instance=ExtResource("3_yhu83")]
+[node name="Landmine2" parent="Landmines" instance=ExtResource("3_yhu83")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.233627, 0.06319913, 1.1975417)
 damage = 3.0
+explosion_effect_scene = ExtResource("4_ejk8a")
 
-[node name="Landmine3" parent="." instance=ExtResource("3_yhu83")]
+[node name="Landmine3" parent="Landmines" instance=ExtResource("3_yhu83")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.233627, 0.14668769, -5.4881706)
 damage = 3.0
+explosion_effect_scene = ExtResource("4_ejk8a")
 
-[node name="Landmine4" parent="." instance=ExtResource("3_yhu83")]
+[node name="Landmine4" parent="Landmines" instance=ExtResource("3_yhu83")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9348984, 0.056845784, -5.4881706)
 damage = 3.0
+explosion_effect_scene = ExtResource("4_ejk8a")
